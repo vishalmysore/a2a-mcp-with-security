@@ -4,7 +4,7 @@ This project demonstrates how to secure your Agent-to-Agent (A2A) and Model Cont
 
 ## Overview
 
-A2A Java is a powerful framework for building agent-based systems, while MCP (Model Context Protocol) enables interaction with various AI models. This project showcases how to:
+[A2A Java](https://github.com/vishalmysore/a2ajava) is a powerful framework for building agent-based systems, while MCP (Model Context Protocol) enables interaction with various AI models. This project showcases how to:
 
 1. Secure agent actions with role-based access control
 2. Integrate Spring Security with A2A Java annotations
