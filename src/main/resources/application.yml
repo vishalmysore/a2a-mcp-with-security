@@ -1,0 +1,15 @@
+spring:
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+    vectorstore:
+      mongodb:
+        initialize-schema: true
+        collection-name: cookgpt_vectorstore
+
+
+
+
+logging:
+  level:
+    org.mongodb.driver.cluster: ERROR
