@@ -63,17 +63,9 @@ The security implementation is handled through Spring Security and is completely
 
 
 
- async def _send_request(self, request: JSONRPCRequest) -> dict[str, Any]:
-        async with httpx.AsyncClient(auth=("user", "password")) as client:
-            try:
-                # Image generation could take time, adding timeout
-                response = await client.post(
-                    self.url, json=request.model_dump(), timeout=self.timeout
-                )
-
 ## Client Integration
 
-### Python Client
+### Python Client  (google a2a client)
 ```python
 async def _send_request(self, request: JSONRPCRequest) -> dict[str, Any]:
     async with httpx.AsyncClient(auth=("user", "password")) as client:
