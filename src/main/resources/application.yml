@@ -7,7 +7,8 @@ spring:
         initialize-schema: true
         collection-name: cookgpt_vectorstore
 
-
+server:
+  port: 7860
 
 
 logging:

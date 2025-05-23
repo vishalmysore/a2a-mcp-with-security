@@ -18,6 +18,7 @@ This project demonstrates how to secure your Agent-to-Agent (A2A) and Model Cont
 - Annotation-based security (@PreAuthorize)
 - Seamless integration with existing A2A Java agents
 - Support for multiple client implementations (Python, Java)
+- servers starts on 7860 you can change it to 8080 in the application.properties file
 
 
 @Log
