@@ -1,6 +1,7 @@
 package vishal.mysore;
 
 
+import io.github.vishalmysore.SecureRTAgentCardController;
 import io.github.vishalmysore.a2a.domain.AgentCard;
 import io.github.vishalmysore.a2a.domain.Authentication;
 import io.github.vishalmysore.a2a.server.RealTimeAgentCardController;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(RealTimeAgentCardController.WELL_KNOWN_PATH)
-public class CarBookingAgentCardController extends SpringAwareAgentCardController {
+public class CarBookingAgentCardController extends SecureRTAgentCardController {
 
 
     @Autowired

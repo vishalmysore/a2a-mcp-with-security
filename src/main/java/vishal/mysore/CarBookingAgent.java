@@ -28,7 +28,51 @@ public class CarBookingAgent {
         return "Car booking with ID " + bookingId + " has been cancelled";
     }
 
+    /**
+     * This is unsecured method
+     * @param bookingId
+     * @return
+     */
+    @Action(description = "Get booking status of a car")
     public String getBookingStatus(String bookingId) {
         return "The status of booking ID " + bookingId + " is confirmed";
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @Action(description = "Block a car for maintenance")
+    public String blockCarForMaintenance(String carId, String reason) {
+        log.info("Blocking car " + carId + " for maintenance");
+        return "Car " + carId + " blocked for maintenance: " + reason;
+    }
+
+    /**
+     * This is unsecured method
+     */
+    @Action(description = "View available car types")
+    public String listCarTypes() {
+        return "Available car types: Economy, Compact, SUV, Luxury";
+    }
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @Action(description = "Update pickup location for booking")
+    public String updatePickupLocation(String bookingId, String newLocation) {
+        log.info("Updating pickup location for booking " + bookingId);
+        return "Pickup location updated to " + newLocation + " for booking " + bookingId;
+    }
+
+    /**
+     * This is unsecured method
+     */
+    @Action(description = "Get pricing for car type")
+    public String getCarPricing(String carType) {
+        return "Pricing for " + carType + " is $50 per day";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @Action(description = "Generate booking report")
+    public String generateBookingReport(String dateRange) {
+        log.info("Generating booking report for " + dateRange);
+        return "Booking report generated for period: " + dateRange;
+    }
+
 }
