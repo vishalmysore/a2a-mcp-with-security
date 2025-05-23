@@ -10,6 +10,8 @@ This project demonstrates how to secure your Agent-to-Agent (A2A) and Model Cont
 2. Integrate Spring Security with A2A Java annotations
 3. Handle authentication for both human users and AI agents
 
+![A2A Security Demo](rbac.png)
+
 ## Features
 
 - Role-based access control (USER and ADMIN roles)
