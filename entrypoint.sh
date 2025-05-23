@@ -1,4 +1,10 @@
-#!/bin/sh
-ls -l /ai/conf
-# Start the Java application
-exec java -Dloader.path=/ai/conf -Djava.security.egd=file:/dev/./urandom -jar /ai/easyQServer.jar
+#!/bin/bash
+
+# Optional: clear the cache on each run
+rm -rf /tmp/wdm-cache/*
+
+# Start the Java app
+exec java \
+  -Dwebdriver.chrome.driver=/tmp/wdm-cache \
+  -DopenAiKey="${OPENAI_API_KEY}" \
+  -jar /ai/mcpdemo.jar
