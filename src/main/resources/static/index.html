@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2A MCP Security Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            color: #e83e8c;
+        }
+        .container {
+            margin-bottom: 30px;
+        }
+        .note {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>A2A and MCP Security Integration Demo</h1>
+    
+    <div class="note">
+        <strong>Live Demo Available!</strong>
+        <p>This demo is deployed and can be accessed at: 
+        <br><code>https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</code></p>
+    </div>    <div class="container">
+        <h2>Test the Demo</h2>
+        <p>Try these commands to see role-based access in action:</p>
+
+        <h3>1. Test Agent Discovery</h3>
+        
+        <h4>With USER role:</h4>
+        <pre>
+curl -u user:password https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</pre>
+        <p>Shows user-level actions like booking cars and checking status.</p>
+
+        <h4>With ADMIN role:</h4>
+        <pre>
+curl -u admin:admin https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</pre>
+        <p>Shows additional admin capabilities like canceling bookings and maintenance operations.</p>
+
+        <h4>Without authentication:</h4>
+        <pre>
+curl https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</pre>
+        <p>Shows only public actions available to unauthenticated users.</p>
+
+        <h3>2. Test MCP Tools</h3>
+
+        <h4>List available tools (no auth):</h4>
+        <pre>
+curl -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}' \
+  https://vishalmysore-a2amcpdemo.hf.space/</pre>
+
+        <h4>List tools with USER role:</h4>
+        <pre>
+curl -u user:password -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}' \
+  https://vishalmysore-a2amcpdemo.hf.space/</pre>
+
+        <h4>List tools with ADMIN role:</h4>
+        <pre>
+curl -u admin:admin -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}' \
+  https://vishalmysore-a2amcpdemo.hf.space/</pre>
+
+        <h3>3. Test Tool Execution</h3>
+
+        <h4>Call a tool (ADMIN example - cancel booking):</h4>
+        <pre>
+curl -u admin:admin -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "name": "cancelCarBooking",
+      "arguments": {
+        "provideAllValuesInPlainEnglish": {
+          "arg0": "2233"
+        }
+      }
+    },
+    "id": 25
+  }' \
+  https://vishalmysore-a2amcpdemo.hf.space/</pre>
+
+        <h4>Call a tool (USER example - book car):</h4>
+        <pre>
+curl -u user:password -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"bookCar","arguments":{"provideAllValuesInPlainEnglish":{"arg0":"sedan","arg1":"toronto","arg2":"vancouver"}}},"id":1}' \
+  https://vishalmysore-a2amcpdemo.hf.space/</pre>
+    </div>
+
+    <div class="container">
+        <h2>Features Demonstrated</h2>
+        <ul>
+            <li>Role-based access control (USER and ADMIN roles)</li>
+            <li>Annotation-based security (@PreAuthorize)</li>
+            <li>Dynamic agent card generation based on roles</li>
+            <li>Seamless integration of A2A and MCP protocols</li>
+            <li>Support for both Python and Java clients</li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>Learn More</h2>
+        <p>Check out the <a href="https://github.com/vishalmysore/a2a-mcp-security">GitHub repository</a> for full documentation and source code.</p>
+    </div>
+</body>
+</html>
