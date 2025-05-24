@@ -23,15 +23,17 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+                .headers(headers -> headers
+                        .frameOptions(frame -> frame.sameOrigin()) //
+                )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/public/**", "/swagger-ui/**", "/v3/api-docs/**", "/.well-known/agent.json","/","/index.html").permitAll()
+                        .requestMatchers("/public/**", "/swagger-ui/**", "/v3/api-docs/**", "/.well-known/agent.json", "/", "/index.html").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
-
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.builder()
