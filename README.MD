@@ -53,35 +53,35 @@ Lets test how the agent cards are exposed to the clients based on thieir roles.
 Test with a user role
 
 ```bash
-curl -u user:password http://localhost:8080/.well-known/agent.json 
+curl -u user:password http://localhost:7860/.well-known/agent.json 
 ```
 
 will give you only these actions 
 
 ```json
-{"name":"Car Booking Agent","description":"This agent provides capabilities for car booking, allowing users to book cars, check booking status, view available car types, and get pricing information.","url":"http://vishal:8080","provider":{"organization":"Car Rentals Inc.","url":"https://example.com"},"version":"1.0.0","documentationUrl":"https://example.com/docs/car-booking-agent","capabilities":{"streaming":true,"pushNotifications":true,"stateTransitionHistory":true},"authentication":{"schemes":["ApiKey"],"credentials":"Basic","valid":true,"bearerAuth":false,"basicAuth":false},"defaultInputModes":["Text","Voice"],"defaultOutputModes":["Text","Voice"],"skills":[{"id":"bookCar","name":"Book Car","description":"Allows users to book a car from the available options.","tags":["booking","car rental","transportation"],"examples":["Book a sedan for tomorrow","Reserve an SUV for the weekend"],"inputModes":["Text","Voice"],"outputModes":["Text","Voice"]},{"id":"getBookingStatus","name":"Get Booking Status","description":"Allows users to check the status of their car bookings.","tags":["status","booking"],"examples":["What is the status of my booking?","Check booking status for today"],"inputModes":["Text","Voice"],"outputModes":["Text","Voice"]},{"id":"listCarTypes","name":"List Car Types","description":"Provides a list of available car types for booking.","tags":["list","car types","available cars"],"examples":["What car types are available?","Show me the list of cars"],"inputModes":["Text","Voice"],"outputModes":["Text","Voice"]},{"id":"getCarPricing","name":"Get Car Pricing","description":"Provides pricing information for different car types.","tags":["pricing","cost","car rental"],"examples":["What is the price for a sedan?","How much does it cost to rent an SUV?"],"inputModes":["Text","Voice"],"outputModes":["Text","Voice"]}]}
+{"name":"Car Booking Agent","description":"This agent provides capabilities for car booking, allowing users to book cars, check booking status, view available car types, and get pricing information.","url":"http://vishal:7860","provider":{"organization":"Car Rentals Inc.","url":"https://example.com"},"version":"1.0.0","documentationUrl":"https://example.com/docs/car-booking-agent","capabilities":{"streaming":true,"pushNotifications":true,"stateTransitionHistory":true},"authentication":{"schemes":["ApiKey"],"credentials":"Basic","valid":true,"bearerAuth":false,"basicAuth":false},"defaultInputModes":["Text","Voice"],"defaultOutputModes":["Text","Voice"],"skills":[{"id":"bookCar","name":"Book Car","description":"Allows users to book a car from the available options.","tags":["booking","car rental","transportation"],"examples":["Book a sedan for tomorrow","Reserve an SUV for the weekend"],"inputModes":["Text","Voice"],"outputModes":["Text","Voice"]},{"id":"getBookingStatus","name":"Get Booking Status","description":"Allows users to check the status of their car bookings.","tags":["status","booking"],"examples":["What is the status of my booking?","Check booking status for today"],"inputModes":["Text","Voice"],"outputModes":["Text","Voice"]},{"id":"listCarTypes","name":"List Car Types","description":"Provides a list of available car types for booking.","tags":["list","car types","available cars"],"examples":["What car types are available?","Show me the list of cars"],"inputModes":["Text","Voice"],"outputModes":["Text","Voice"]},{"id":"getCarPricing","name":"Get Car Pricing","description":"Provides pricing information for different car types.","tags":["pricing","cost","car rental"],"examples":["What is the price for a sedan?","How much does it cost to rent an SUV?"],"inputModes":["Text","Voice"],"outputModes":["Text","Voice"]}]}
 
 ```
 
 Test without a role
 
 ``` 
-curl http://localhost:8080/.well-known/agent.json
+curl http://localhost:7860/.well-known/agent.json
 ```
 
 ```json
- {"name":"Car Booking Agent","description":"This agent provides capabilities related to booking cars, checking booking status, listing car types, and retrieving car pricing.","url":"http://vishal:8080","provider":{"organization":"Car Rentals Inc.","url":"https://example.com"},"version":"1.0.0","documentationUrl":"https://example.com/docs/car-booking-agent","capabilities":{"streaming":true,"pushNotifications":true,"stateTransitionHistory":false},"authentication":{"schemes":["ApiKey"],"credentials":"Basic","valid":true,"bearerAuth":false,"basicAuth":false},"defaultInputModes":["text","voice"],"defaultOutputModes":["text","voice"],"skills":[{"id":"car_booking","name":"Car Booking","description":"Allows users to book cars, check booking status, and retrieve pricing information.","tags":["car","booking","transportation"],"examples":["Book a sedan from the airport","Check the status of my booking","List available SUVs","Get pricing for a compact car"],"inputModes":["text","voice"],"outputModes":["text","voice"]}]}
+ {"name":"Car Booking Agent","description":"This agent provides capabilities related to booking cars, checking booking status, listing car types, and retrieving car pricing.","url":"http://vishal:7860","provider":{"organization":"Car Rentals Inc.","url":"https://example.com"},"version":"1.0.0","documentationUrl":"https://example.com/docs/car-booking-agent","capabilities":{"streaming":true,"pushNotifications":true,"stateTransitionHistory":false},"authentication":{"schemes":["ApiKey"],"credentials":"Basic","valid":true,"bearerAuth":false,"basicAuth":false},"defaultInputModes":["text","voice"],"defaultOutputModes":["text","voice"],"skills":[{"id":"car_booking","name":"Car Booking","description":"Allows users to book cars, check booking status, and retrieve pricing information.","tags":["car","booking","transportation"],"examples":["Book a sedan from the airport","Check the status of my booking","List available SUVs","Get pricing for a compact car"],"inputModes":["text","voice"],"outputModes":["text","voice"]}]}
 ```
 
 Test with admin role
 
 
 ```bash
-curl -u admin:admin http://localhost:8080/.well-known/agent.json
+curl -u admin:admin http://localhost:7860/.well-known/agent.json
 ```
 
 ```json
- {"name":"Car Booking Agent","description":"This agent provides capabilities related to car booking, including booking management and status tracking.","url":"http://vishal:8080","provider":{"organization":"Car Rentals Inc.","url":"https://example.com"},"version":"1.0.0","documentationUrl":"https://example.com/documentation","capabilities":{"streaming":true,"pushNotifications":true,"stateTransitionHistory":true},"authentication":{"schemes":["ApiKey"],"credentials":"Basic","valid":true,"bearerAuth":false,"basicAuth":false},"defaultInputModes":["text","voice"],"defaultOutputModes":["text","voice"],"skills":[{"id":"carBooking","name":"Car Booking Management","description":"Manage car bookings including creation, cancellation, and status checks.","tags":["booking","car","management"],"examples":["Book a car for tomorrow","Cancel my booking","What is the status of my booking?"],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"getBookingStatus","name":"Get Booking Status","description":"Check the current status of a car booking.","tags":["status","booking"],"examples":["What is the status of my booking?","Is my car ready for pickup?"],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"listCarTypes","name":"List Car Types","description":"Retrieve a list of available car types for booking.","tags":["car types","listing"],"examples":["What car types do you have?","List the available cars for today."],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"getCarPricing","name":"Get Car Pricing","description":"Fetch the pricing information for different car types.","tags":["pricing","car"],"examples":["What is the price for a sedan?","How much does it cost to rent an SUV?"],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"cancelCarBooking","name":"Cancel Car Booking","description":"Cancel an existing car booking.","tags":["cancellation","booking"],"examples":["Cancel my booking for tomorrow.","I want to cancel my reservation."],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"blockCarForMaintenance","name":"Block Car for Maintenance","description":"Block a car for maintenance to prevent bookings.","tags":["maintenance","blocking"],"examples":["Block a car for maintenance.","Put this car on hold for servicing."],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"generateBookingReport","name":"Generate Booking Report","description":"Generate a report of bookings for analysis.","tags":["reporting","booking"],"examples":["Generate a report of all bookings for the week.","Show me the booking report for this month."],"inputModes":["text","voice"],"outputModes":["text","voice"]}]}
+ {"name":"Car Booking Agent","description":"This agent provides capabilities related to car booking, including booking management and status tracking.","url":"http://vishal:7860","provider":{"organization":"Car Rentals Inc.","url":"https://example.com"},"version":"1.0.0","documentationUrl":"https://example.com/documentation","capabilities":{"streaming":true,"pushNotifications":true,"stateTransitionHistory":true},"authentication":{"schemes":["ApiKey"],"credentials":"Basic","valid":true,"bearerAuth":false,"basicAuth":false},"defaultInputModes":["text","voice"],"defaultOutputModes":["text","voice"],"skills":[{"id":"carBooking","name":"Car Booking Management","description":"Manage car bookings including creation, cancellation, and status checks.","tags":["booking","car","management"],"examples":["Book a car for tomorrow","Cancel my booking","What is the status of my booking?"],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"getBookingStatus","name":"Get Booking Status","description":"Check the current status of a car booking.","tags":["status","booking"],"examples":["What is the status of my booking?","Is my car ready for pickup?"],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"listCarTypes","name":"List Car Types","description":"Retrieve a list of available car types for booking.","tags":["car types","listing"],"examples":["What car types do you have?","List the available cars for today."],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"getCarPricing","name":"Get Car Pricing","description":"Fetch the pricing information for different car types.","tags":["pricing","car"],"examples":["What is the price for a sedan?","How much does it cost to rent an SUV?"],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"cancelCarBooking","name":"Cancel Car Booking","description":"Cancel an existing car booking.","tags":["cancellation","booking"],"examples":["Cancel my booking for tomorrow.","I want to cancel my reservation."],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"blockCarForMaintenance","name":"Block Car for Maintenance","description":"Block a car for maintenance to prevent bookings.","tags":["maintenance","blocking"],"examples":["Block a car for maintenance.","Put this car on hold for servicing."],"inputModes":["text","voice"],"outputModes":["text","voice"]},{"id":"generateBookingReport","name":"Generate Booking Report","description":"Generate a report of bookings for analysis.","tags":["reporting","booking"],"examples":["Generate a report of all bookings for the week.","Show me the booking report for this month."],"inputModes":["text","voice"],"outputModes":["text","voice"]}]}
 ```
 
 
@@ -121,7 +121,7 @@ curl -v -u user:password \
     },
     "id": "d0ed3aa440f64d63a3a73d2bc7eb6358"
   }' \
-  http://localhost:8080/
+  http://localhost:7860/
 ```
 
 Result 
@@ -143,7 +143,7 @@ but when you call with different username and password you will get access denie
 Test without a role 
 
 ```bash 
- curl -H "Content-Type: application/json"   -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}'   http://localhost:8080/
+ curl -H "Content-Type: application/json"   -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}'   http://localhost:7860/
 
 ```
 
@@ -155,7 +155,7 @@ Test without a role
 Test with a user role
 
 ```bash
-curl -u user:password -H "Content-Type: application/json"   -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}'   http://localhost:8080/
+curl -u user:password -H "Content-Type: application/json"   -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}'   http://localhost:7860/
 
 ````
 
@@ -168,7 +168,7 @@ and you get
 Test with an admin role
 
 ```bash
- curl -u admin:admin -H "Content-Type: application/json"   -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}'   http://localhost:8080/
+ curl -u admin:admin -H "Content-Type: application/json"   -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}'   http://localhost:7860/
 
 ```
 
@@ -196,7 +196,7 @@ curl -u admin:admin \
     },
     "id": 25
   }' \
-  http://localhost:8080/
+  http://localhost:7860/
   ```
 and your result will be 
 
@@ -223,7 +223,7 @@ curl -u user:password \
     },
     "id": 25
   }' \
-  http://localhost:8080/
+  http://localhost:7860/
 ```
 
 The result will be 
@@ -275,7 +275,7 @@ Configuration example:
     "args": [
       "-jar",
       "/work/a2a-mcp-bridge/target/mcp-connector-full.jar",
-      "http://localhost:8080",
+      "http://localhost:7860",
       "user",
       "password"
     ],

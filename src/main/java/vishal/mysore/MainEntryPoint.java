@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 /** Expose the Json-RPC endpoint for the tasks
  *  This will handle all the JSON RPC Requests for a2a such as
@@ -34,7 +32,10 @@ public class MainEntryPoint extends SecureSpringJSONController {
 
 
 
-
+    @GetMapping
+    public ModelAndView forwardToIndex() {
+        return new ModelAndView("forward:/index.html");
+    }
 
     @PostMapping
     public Object handleRpc(@RequestBody JsonRpcRequest request) {
