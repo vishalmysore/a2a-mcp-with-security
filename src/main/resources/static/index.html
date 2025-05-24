@@ -1,130 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>A2A MCP Security Demo</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          line-height: 1.6;
+          margin: 0;
+          padding: 20px;
+          max-width: 1000px;
+          margin: 0 auto;
+          background-color: #f9fbfc;
         }
-        h1, h2 {
-            color: #2c3e50;
+        h1, h2, h3, h4 {
+          color: #2c3e50;
+        }
+        h1 {
+          margin-top: 0;
         }
         pre {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
+          background-color: #f8f9fa;
+          padding: 15px;
+          border-radius: 5px;
+          overflow-x: auto;
+          font-size: 14px;
         }
         code {
-            color: #e83e8c;
+          color: #e83e8c;
         }
         .container {
-            margin-bottom: 30px;
+          margin-bottom: 40px;
         }
         .note {
-            background-color: #e3f2fd;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
+          background-color: #e3f2fd;
+          padding: 20px;
+          border-left: 5px solid #42a5f5;
+          border-radius: 5px;
+          margin: 30px 0;
+        }
+        ul {
+          padding-left: 20px;
+        }
+        a {
+          color: #007bff;
+          text-decoration: none;
+        }
+        a:hover {
+          text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>A2A and MCP Security Integration Demo</h1>
-    
-    <div class="note">
-        <strong>Live Demo Available!</strong>
-        <p>This demo is deployed and can be accessed at: 
-        <br><code>https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</code></p>
-    </div>    <div class="container">
-        <h2>Test the Demo</h2>
-        <p>Try these commands to see role-based access in action:</p>
+<h1>A2A & MCP Security Integration Demo</h1>
 
-        <h3>1. Test Agent Discovery</h3>
-        
-        <h4>With USER role:</h4>
-        <pre>
-curl -u user:password https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</pre>
-        <p>Shows user-level actions like booking cars and checking status.</p>
+<div class="note">
+    <strong>🌐 Live Demo Available!</strong>
+    <p>Explore the deployed live demo:</p>
+    <p><code>https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</code></p>
+</div>
 
-        <h4>With ADMIN role:</h4>
-        <pre>
-curl -u admin:admin https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</pre>
-        <p>Shows additional admin capabilities like canceling bookings and maintenance operations.</p>
+<div class="container">
+    <h2>🛠️ What is a2ajava?</h2>
+    <p>
+        <strong>a2ajava</strong> is a powerfull agentic sdk, which is swiss knife to build agentic applicaiton , annotation-based Java library built to implement Agent-to-Agent (A2A) protocol and also
+        <strong>Model Context Protocol (MCP)</strong>. It enables the exposure of secure, semantically described agents over JSON-RPC with minimal configuration.
+    </p>
+    <ul>
+        <li>✅ Simple to integrate in Spring Boot or standalone Java apps</li>
+        <li>✅ Supports tool listing and dynamic invocation via JSON-RPC</li>
+        <li>✅ Enables role-based filtering using annotations like <code>@PreAuthorize</code></li>
+        <li>✅ Auto-generates agent manifests compliant with OpenAI Tool/Function Calling and Claude Tool Use</li>
+        <li>✅ Powerful when combined with AI orchestration tools like <strong>OpenAI, Claude, Grok</strong></li>
+    </ul>
+    <p>
+        It bridges the gap between Java backend services and AI agents needing structured capability descriptions.
+    </p>
+</div>
 
-        <h4>Without authentication:</h4>
-        <pre>
-curl https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</pre>
-        <p>Shows only public actions available to unauthenticated users.</p>
+<div class="container">
+    <h2>🚀 Test the Demo</h2>
+    <p>Run these <code>curl</code> commands to explore dynamic access control using A2A + MCP + Security:</p>
 
-        <h3>2. Test MCP Tools</h3>
+    <h3>1. 🔍 Agent Discovery</h3>
 
-        <h4>List available tools (no auth):</h4>
-        <pre>
-curl -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}' \
-  https://vishalmysore-a2amcpdemo.hf.space/</pre>
+    <h4>USER Role</h4>
+    <pre>curl -u user:password https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</pre>
+    <p>Returns a list of user-accessible tools like booking cars or checking status.</p>
 
-        <h4>List tools with USER role:</h4>
-        <pre>
-curl -u user:password -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}' \
-  https://vishalmysore-a2amcpdemo.hf.space/</pre>
+    <h4>ADMIN Role</h4>
+    <pre>curl -u admin:admin https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</pre>
+    <p>Includes advanced capabilities like canceling bookings or scheduling maintenance.</p>
 
-        <h4>List tools with ADMIN role:</h4>
-        <pre>
-curl -u admin:admin -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}' \
-  https://vishalmysore-a2amcpdemo.hf.space/</pre>
+    <h4>Anonymous Access</h4>
+    <pre>curl https://vishalmysore-a2amcpdemo.hf.space/.well-known/agent.json</pre>
+    <p>Returns only tools publicly exposed without login.</p>
 
-        <h3>3. Test Tool Execution</h3>
+    <h3>2. 🔧 List Tools</h3>
 
-        <h4>Call a tool (ADMIN example - cancel booking):</h4>
-        <pre>
-curl -u admin:admin -H "Content-Type: application/json" \
-  -d '{
-    "jsonrpc": "2.0",
-    "method": "tools/call",
-    "params": {
-      "name": "cancelCarBooking",
-      "arguments": {
-        "provideAllValuesInPlainEnglish": {
-          "arg0": "2233"
-        }
+    <h4>Unauthenticated</h4>
+    <pre>curl -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}' https://vishalmysore-a2amcpdemo.hf.space/</pre>
+
+    <h4>With USER Role</h4>
+    <pre>curl -u user:password -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}' https://vishalmysore-a2amcpdemo.hf.space/</pre>
+
+    <h4>With ADMIN Role</h4>
+    <pre>curl -u admin:admin -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}' https://vishalmysore-a2amcpdemo.hf.space/</pre>
+
+    <h3>3. ⚙️ Tool Execution</h3>
+
+    <h4>Cancel Booking (ADMIN)</h4>
+    <pre>curl -u admin:admin -H "Content-Type: application/json" \
+-d '{
+  "jsonrpc": "2.0",
+  "method": "tools/call",
+  "params": {
+    "name": "cancelCarBooking",
+    "arguments": {
+      "provideAllValuesInPlainEnglish": {
+        "arg0": "2233"
       }
-    },
-    "id": 25
-  }' \
-  https://vishalmysore-a2amcpdemo.hf.space/</pre>
+    }
+  },
+  "id": 25
+}' \
+https://vishalmysore-a2amcpdemo.hf.space/</pre>
 
-        <h4>Call a tool (USER example - book car):</h4>
-        <pre>
-curl -u user:password -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"bookCar","arguments":{"provideAllValuesInPlainEnglish":{"arg0":"sedan","arg1":"toronto","arg2":"vancouver"}}},"id":1}' \
-  https://vishalmysore-a2amcpdemo.hf.space/</pre>
-    </div>
+    <h4>Book Car (USER)</h4>
+    <pre>curl -u user:password -H "Content-Type: application/json" \
+-d '{"jsonrpc":"2.0","method":"tools/call","params":{"name":"bookCar","arguments":{"provideAllValuesInPlainEnglish":{"arg0":"sedan","arg1":"toronto","arg2":"vancouver"}}},"id":1}' \
+https://vishalmysore-a2amcpdemo.hf.space/</pre>
+</div>
 
-    <div class="container">
-        <h2>Features Demonstrated</h2>
-        <ul>
-            <li>Role-based access control (USER and ADMIN roles)</li>
-            <li>Annotation-based security (@PreAuthorize)</li>
-            <li>Dynamic agent card generation based on roles</li>
-            <li>Seamless integration of A2A and MCP protocols</li>
-            <li>Support for both Python and Java clients</li>
-        </ul>
-    </div>
+<div class="container">
+    <h2>🔐 Features Demonstrated</h2>
+    <ul>
+        <li><strong>Role-based access control</strong> using Spring Security</li>
+        <li><strong>@PreAuthorize</strong> annotations control tool visibility and execution</li>
+        <li><strong>Dynamic agent.json</strong> generation per user role</li>
+        <li><strong>a2ajava</strong> framework simplifies exposing secure tools</li>
+        <li><strong>Cross-language support</strong> (Python/Java clients)</li>
+        <li><strong>Deploy anywhere</strong>: HF Space, Render, or your own server</li>
+    </ul>
+</div>
 
-    <div class="container">
-        <h2>Learn More</h2>
-        <p>Check out the <a href="https://github.com/vishalmysore/a2a-mcp-security">GitHub repository</a> for full documentation and source code.</p>
-    </div>
+<div class="container">
+    <h2>📚 Learn More</h2>
+    <p>Explore the full source code, setup instructions, and more at:</p>
+    <p><a href="https://github.com/vishalmysore/a2a-mcp-with-security" target="_blank">GitHub Repository: a2a-mcp-with-security</a></p>
+</div>
 </body>
 </html>
