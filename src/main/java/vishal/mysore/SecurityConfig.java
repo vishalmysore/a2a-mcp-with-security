@@ -24,7 +24,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .headers(headers -> headers
-                        .frameOptions(frame -> frame.sameOrigin()) //
+                        .frameOptions(frame -> frame.disable()) // <== Disable X-Frame-Options
                 )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/public/**", "/swagger-ui/**", "/v3/api-docs/**", "/.well-known/agent.json", "/", "/index.html").permitAll()
